@@ -6,7 +6,7 @@
 #    By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/08 10:05:58 by dhubleur          #+#    #+#              #
-#    Updated: 2022/01/16 22:28:46 by dhubleur         ###   ########.fr        #
+#    Updated: 2022/01/16 22:34:52 by dhubleur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -136,7 +136,7 @@ message:
 $(OBJS_PATH)/%.o:	$(SRCS_PATH)/%$(SRCS_EXTENSION)
 			@mkdir -p $(dir $@)
 			@echo "$(CYAN)Compiling $(BLUE)$@ ...$(NO_COLOR)"
-			@$(CC) $(CFLAGS) ${INCLUDE_FLAGS} -MMD -MP -c $< -o $@
+			@$(CC) $(CFLAGS) -MMD -MF $(@:.o=.d)  ${INCLUDE_FLAGS} -c $< -o $@
 $(OBJS_PATH)/%.o:	%$(SRCS_EXTENSION)
 			@mkdir -p $(dir $@)
 			@echo "$(CYAN)Compiling $(BLUE)$@ ...$(NO_COLOR)"
