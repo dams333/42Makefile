@@ -1,5 +1,6 @@
 # RoadMap
 - Make the libraries' system more clean and scalable
+- Add compilation progress bar
 # Documentation
 ## Compilation
 ### Basic
