@@ -21,7 +21,7 @@
 - Your main need to be defined in the variable `MAIN` _(if it's in the srcs folder, please specify it as `srcs/main.c`)_
 - Add all the other sources in the variable `SRCS`
 ### Includes
-- Use `INCLUDE_DIRS` to choose the folder where are all `.h` files
+- Use `INCLUDE_DIRS` to choose all the folders where are the `.h` files
 ---
 ## Libs
 - You can activate the use of different libraries in the corresponding sections
