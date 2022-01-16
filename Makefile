@@ -6,7 +6,7 @@
 #    By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/08 10:05:58 by dhubleur          #+#    #+#              #
-#    Updated: 2022/01/16 16:11:55 by dhubleur         ###   ########.fr        #
+#    Updated: 2022/01/16 16:14:54 by dhubleur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -128,6 +128,7 @@ header:
 #Compilation
 $(OBJS_PATH)/%.o:	$(SRCS_PATH)/%$(SRCS_EXTENSION)
 			@mkdir -p ${OBJS_PATH}
+			@echo "$(CYAN)Compiling $(BLUE)$@ ...$(NO_COLOR)"
 			@$(CC) $(CFLAGS) -c $< -o $@ ${INCLUDE_FLAGS}
 $(OBJS_PATH)/%.o:	%$(SRCS_EXTENSION)
 			@mkdir -p ${OBJS_PATH}
