@@ -6,7 +6,7 @@
 #    By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/08 10:05:58 by dhubleur          #+#    #+#              #
-#    Updated: 2022/01/16 16:14:54 by dhubleur         ###   ########.fr        #
+#    Updated: 2022/01/16 16:29:53 by dhubleur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@
 
 NAME		= 	philo
 CC			= 	gcc
+CFLAGS		=
 
 ################################################################################
 #									Sources									   #
@@ -94,9 +95,9 @@ ifeq ($(IS_MLX),true)
 endif
 
 ifeq (noflag, $(filter noflag,$(MAKECMDGOALS)))
-	CFLAGS	=	-Wall
+	CFLAGS	+=	-Wall
 else
-	CFLAGS	=	-Wall -Wextra -Werror
+	CFLAGS	+=	-Wall -Wextra -Werror
 endif
 ifeq (debug, $(filter debug,$(MAKECMDGOALS)))
 	CFLAGS	+=	-g3
