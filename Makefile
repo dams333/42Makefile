@@ -6,7 +6,7 @@
 #    By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/08 10:05:58 by dhubleur          #+#    #+#              #
-#    Updated: 2022/01/16 16:10:34 by dhubleur         ###   ########.fr        #
+#    Updated: 2022/01/16 16:11:55 by dhubleur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,22 +15,7 @@
 ################################################################################
 
 NAME		= 	philo
-
 CC			= 	gcc
-ifeq (noflag, $(filter noflag,$(MAKECMDGOALS)))
-	CFLAGS	=	-Wall
-else
-	CFLAGS	=	-Wall -Wextra -Werror
-endif
-ifeq (debug, $(filter debug,$(MAKECMDGOALS)))
-	CFLAGS	+=	-g3
-endif
-ifeq (sanadd, $(filter sanadd,$(MAKECMDGOALS)))
-	CFLAGS	+=	-fsanitize=address
-endif
-ifeq (santhread, $(filter santhread,$(MAKECMDGOALS)))
-	CFLAGS	+=	-fsanitize=thread
-endif
 
 ################################################################################
 #									Sources									   #
@@ -38,8 +23,8 @@ endif
 
 SRCS_EXTENSION	=	.c
 SRCS_PATH		=	./srcs
-MAIN			=	maintest.c
-SRCS			=	test.c test2.c
+MAIN			=	main.c          #if in srcs_dir, add it to the path
+SRCS			=	
 
 ################################################################################
 #									Includes								   #
@@ -106,6 +91,21 @@ endif
 ifeq ($(IS_MLX),true)
 	INCLUDE_FLAGS	+=	$(addprefix -I , ${MLX_INCLUDE_DIR})
 	ALL_LIBS		+=	$(MLX_COMPLETE)
+endif
+
+ifeq (noflag, $(filter noflag,$(MAKECMDGOALS)))
+	CFLAGS	=	-Wall
+else
+	CFLAGS	=	-Wall -Wextra -Werror
+endif
+ifeq (debug, $(filter debug,$(MAKECMDGOALS)))
+	CFLAGS	+=	-g3
+endif
+ifeq (sanadd, $(filter sanadd,$(MAKECMDGOALS)))
+	CFLAGS	+=	-fsanitize=address
+endif
+ifeq (santhread, $(filter santhread,$(MAKECMDGOALS)))
+	CFLAGS	+=	-fsanitize=thread
 endif
 
 ################################################################################
