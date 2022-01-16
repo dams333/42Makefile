@@ -6,7 +6,7 @@
 #    By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/08 10:05:58 by dhubleur          #+#    #+#              #
-#    Updated: 2022/01/16 17:01:43 by dhubleur         ###   ########.fr        #
+#    Updated: 2022/01/16 21:36:28 by dhubleur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 #									Utils									   #
 ################################################################################
 
-NAME		= 	philo
+NAME		= 	test
 CC			= 	gcc
 CFLAGS		=
 
@@ -31,7 +31,9 @@ SRCS			=
 #									Includes								   #
 ################################################################################
 
+INCLUDE_EXTENSION	=	.h
 INCLUDE_DIRS		=	./includes 
+DEPENDS				=	
 
 ################################################################################
 #									Libft									   #
@@ -63,6 +65,7 @@ OBJS_PATH		=	./objs
 
 OBJS			=	$(addprefix $(OBJS_PATH)/, ${SRCS:$(SRCS_EXTENSION)=.o})
 OBJ_MAIN		=	$(addprefix $(OBJS_PATH)/, ${MAIN:$(SRCS_EXTENSION)=.o})
+OBJS_DEPEND		=	$(addprefix $(OBJS_PATH)/, ${DEPENDS:$(INCLUDE_EXTENSION)=.d})
 
 ################################################################################
 #									Constants								   #
@@ -129,11 +132,11 @@ header:
 $(OBJS_PATH)/%.o:	$(SRCS_PATH)/%$(SRCS_EXTENSION)
 			@mkdir -p $(dir $@)
 			@echo "$(CYAN)Compiling $(BLUE)$@ ...$(NO_COLOR)"
-			@$(CC) $(CFLAGS) -c $< -o $@ ${INCLUDE_FLAGS}
+			@$(CC) $(CFLAGS) ${INCLUDE_FLAGS} -MMD -MP -c $< -o $@
 $(OBJS_PATH)/%.o:	%$(SRCS_EXTENSION)
 			@mkdir -p $(dir $@)
 			@echo "$(CYAN)Compiling $(BLUE)$@ ...$(NO_COLOR)"
-			@$(CC) $(CFLAGS) -c $< -o $@ ${INCLUDE_FLAGS}
+			@$(CC) $(CFLAGS) -MMD -MF $(@:.o=.d)  ${INCLUDE_FLAGS} -c $< -o $@
 
 $(LIBFT_COMPLETE):
 ifeq ($(IS_LIBFT),true)
@@ -145,8 +148,9 @@ ifeq ($(IS_MLX),true)
 			@make -C $(MLX_DIR) all
 			@echo "$(GREEN)Compiled MLX !$(NO_COLOR)"
 endif
-
+			
 #Link
+-include $(OBJS_DEPEND)
 $(NAME):	${OBJS} ${OBJ_MAIN} ${ALL_LIBS}
 		@echo "$(ORANGE)Linking $(BLUE)$@ ...$(NO_COLOR)"
 		@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -o $@ ${OBJS} ${OBJ_MAIN} ${ALL_LIBS}

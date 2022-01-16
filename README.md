@@ -1,5 +1,4 @@
 # RoadMap
-- Add use of dependencies' file to recompile when modifing `.h`
 - Make the libraries' system more clean and scalable
 - Make the command options' system more clean
 # Documentation
