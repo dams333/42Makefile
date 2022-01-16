@@ -8,7 +8,7 @@
 - You can choose the executable's name with the variable `name` 
 ### Add default compilation's flags
 - By default the Makefile compile with `-Wall -Wextra -Werror`
-- With `make [rule] noflag`, you can disable `-Wextra -Werror`
+- With `make [rule] noflag`, you can disable `-Werror`
 - With `make [rule] debug`, you can add `-g3`
 - With `make [rule] sanadd`, you can add `-fsanitize=address`
 - With `make [rule] santhread`, you can add `-fsanitize=thread`
