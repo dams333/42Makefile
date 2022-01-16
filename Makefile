@@ -6,7 +6,7 @@
 #    By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/08 10:05:58 by dhubleur          #+#    #+#              #
-#    Updated: 2022/01/16 21:36:28 by dhubleur         ###   ########.fr        #
+#    Updated: 2022/01/16 21:38:47 by dhubleur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -195,8 +195,12 @@ santhread:
 show:		header
 		@echo "$(CYAN)Compilator: $(GREEN)$(CC)$(NO_COLOR)"
 		@echo "$(CYAN)Flags: $(GREEN)$(CFLAGS)$(NO_COLOR)"
+		@echo "$(CYAN)Includes: $(GREEN)$(INCLUDE_FLAGS)$(NO_COLOR)"
 		@echo ""
 		@echo "$(CYAN)Sources:$(NO_COLOR)"
 		@echo "$(GREEN)$(MAIN) ${addprefix $(SRCS_PATH)/, $(SRCS)}$(NO_COLOR)"
+		@echo ""
+		@echo "$(CYAN)Libs:$(NO_COLOR)"
+		@echo "$(GREEN)$(ALL_LIBS)$(NO_COLOR)"
 		
 .PHONY:		all header clean fclean re run fcleanlib relib noflag debug sanadd santhread show
