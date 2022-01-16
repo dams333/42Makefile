@@ -6,7 +6,7 @@
 #    By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/08 10:05:58 by dhubleur          #+#    #+#              #
-#    Updated: 2022/01/16 22:06:03 by dhubleur         ###   ########.fr        #
+#    Updated: 2022/01/16 22:07:21 by dhubleur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -117,6 +117,7 @@ endif
 
 all:	header message $(NAME)
 
+#beautiful
 header:
 		@echo -n "${BLUE}"
 		@echo "  _  _ ___                    _         __ _ _      "
