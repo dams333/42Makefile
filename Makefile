@@ -6,7 +6,7 @@
 #    By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/08 10:05:58 by dhubleur          #+#    #+#              #
-#    Updated: 2022/01/16 16:04:58 by dhubleur         ###   ########.fr        #
+#    Updated: 2022/01/16 16:10:34 by dhubleur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ endif
 SRCS_EXTENSION	=	.c
 SRCS_PATH		=	./srcs
 MAIN			=	maintest.c
-SRCS			=	
+SRCS			=	test.c test2.c
 
 ################################################################################
 #									Includes								   #
@@ -186,5 +186,12 @@ sanadd:
 		@echo -n ""
 santhread:
 		@echo -n ""
+
+show:		header
+		@echo "$(CYAN)Compilator: $(GREEN)$(CC)$(NO_COLOR)"
+		@echo "$(CYAN)Flags: $(GREEN)$(CFLAGS)$(NO_COLOR)"
+		@echo ""
+		@echo "$(CYAN)Sources:$(NO_COLOR)"
+		@echo "$(GREEN)$(MAIN) ${addprefix $(SRCS_PATH)/, $(SRCS)}$(NO_COLOR)"
 		
-.PHONY:		all header clean fclean re run fcleanlib relib noflag debug sanadd santhread
+.PHONY:		all header clean fclean re run fcleanlib relib noflag debug sanadd santhread show
