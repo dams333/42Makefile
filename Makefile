@@ -6,7 +6,7 @@
 #    By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/08 10:05:58 by dhubleur          #+#    #+#              #
-#    Updated: 2022/01/16 21:38:47 by dhubleur         ###   ########.fr        #
+#    Updated: 2022/01/16 21:47:29 by dhubleur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -183,15 +183,6 @@ run:		header all
 		@echo ""
 		@./$(NAME)
 
-noflag:
-		@echo -n ""
-debug:
-		@echo -n ""
-sanadd:
-		@echo -n ""
-santhread:
-		@echo -n ""
-
 show:		header
 		@echo "$(CYAN)Compilator: $(GREEN)$(CC)$(NO_COLOR)"
 		@echo "$(CYAN)Flags: $(GREEN)$(CFLAGS)$(NO_COLOR)"
@@ -202,5 +193,15 @@ show:		header
 		@echo ""
 		@echo "$(CYAN)Libs:$(NO_COLOR)"
 		@echo "$(GREEN)$(ALL_LIBS)$(NO_COLOR)"
+
+#do nothing
+noflag: 	all
+		@echo -n ""
+debug:		all
+		@echo -n ""
+sanadd:		all
+		@echo -n ""
+santhread:	all
+		@echo -n ""
 		
 .PHONY:		all header clean fclean re run fcleanlib relib noflag debug sanadd santhread show
