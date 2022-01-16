@@ -6,7 +6,7 @@
 #    By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/08 10:05:58 by dhubleur          #+#    #+#              #
-#    Updated: 2022/01/16 15:54:19 by dhubleur         ###   ########.fr        #
+#    Updated: 2022/01/16 16:04:58 by dhubleur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,10 +17,20 @@
 NAME		= 	philo
 
 CC			= 	gcc
-CFLAGS		=	-Wall -Wextra -Werror
-#CFLAGS		+=	-g3
-#CFLAGS		+=	-fsanitize=address
-#CFLAGS		+=	-fsanitize=thread
+ifeq (noflag, $(filter noflag,$(MAKECMDGOALS)))
+	CFLAGS	=	-Wall
+else
+	CFLAGS	=	-Wall -Wextra -Werror
+endif
+ifeq (debug, $(filter debug,$(MAKECMDGOALS)))
+	CFLAGS	+=	-g3
+endif
+ifeq (sanadd, $(filter sanadd,$(MAKECMDGOALS)))
+	CFLAGS	+=	-fsanitize=address
+endif
+ifeq (santhread, $(filter santhread,$(MAKECMDGOALS)))
+	CFLAGS	+=	-fsanitize=thread
+endif
 
 ################################################################################
 #									Sources									   #
@@ -136,10 +146,9 @@ ifeq ($(IS_MLX),true)
 endif
 
 #Link
-$(NAME):	${OBJS} ${OBJ_MAIN} ${LIBFT_COMPLETE} ${MLX_COMPLETE}
-		@echo ""
+$(NAME):	${OBJS} ${OBJ_MAIN} ${ALL_LIBS}
 		@echo "$(ORANGE)Linking $(BLUE)$@ ...$(NO_COLOR)"
-			@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -o $@ ${OBJS} ${OBJ_MAIN} ${ALL_LIBS}
+		@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -o $@ ${OBJS} ${OBJ_MAIN} ${ALL_LIBS}
 		@echo "$(GREEN)$@ created !$(NO_COLOR)"
 
 #clean
@@ -168,5 +177,14 @@ run:		header all
 		@echo "$(BLUE)Executing...$(NO_COLOR)"
 		@echo ""
 		@./$(NAME)
+
+noflag:
+		@echo -n ""
+debug:
+		@echo -n ""
+sanadd:
+		@echo -n ""
+santhread:
+		@echo -n ""
 		
-.PHONY:		all header clean fclean re run fcleanlib relib
+.PHONY:		all header clean fclean re run fcleanlib relib noflag debug sanadd santhread
