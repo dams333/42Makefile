@@ -12,7 +12,7 @@
 - With `make [rule] debug`, you can add `-g3`
 - With `make [rule] sanadd`, you can add `-fsanitize=address`
 - With `make [rule] santhread`, you can add `-fsanitize=thread`
-- If you don't specify a rule, `make [rule] noflag` is equal to `make all noflag`
+- If you don't specify a rule, `make noflag` is equal to `make all noflag`
 - All this flags are cumulative
 ---
 ## Files
