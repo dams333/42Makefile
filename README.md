@@ -1,7 +1,7 @@
 # RoadMap
 - Make the library addition system cleaner and scalable
 - Add a progress bar during compilation
-- A bash script that setup all the makefile's variables for new projects
+- A bash script that generate makefile and setup all the variables for a new project
 # Documentation
 ## Compilation
 ### Basic
