@@ -6,7 +6,7 @@
 #    By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/08 10:05:58 by dhubleur          #+#    #+#              #
-#    Updated: 2022/01/16 15:01:27 by dhubleur         ###   ########.fr        #
+#    Updated: 2022/01/16 15:54:19 by dhubleur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,25 @@ SRCS			=
 INCLUDE_EXTENSION	=	.h
 INCLUDE_DIRS		=	./includes 
 
+################################################################################
+#									Libft									   #
+################################################################################
+
+IS_LIBFT			=	false
+
+LIBFT_DIR			=	./libft
+LIBFT_INCLUDE_DIR	=	./libft
+LIBFT_NAME			=	libft.a
+
+################################################################################
+#									MiniLibX								   #
+################################################################################
+
+IS_MLX				=	false
+
+MLX_DIR				=	./minilibx-linux
+MLX_INCLUDE_DIR		=	./minilibx-linux
+MLX_NAME			=	minilibx.a
 
 #                          /!\ Don't touch next /!\ 
 
@@ -64,7 +83,20 @@ NO_COLOR	=	\033[m
 #									Makefile								   #
 ################################################################################
 
-INCLUDE_FLAGS = $(addprefix -I , ${INCLUDE_DIRS})
+INCLUDE_FLAGS 	=	$(addprefix -I , ${INCLUDE_DIRS})
+
+LIBFT_COMPLETE	=	$(LIBFT_DIR)/${LIBFT_NAME}
+MLX_COMPLETE	=	$(LIBFT_DIR)/${LIBFT_NAME}
+
+ifeq ($(IS_LIBFT),true)
+	INCLUDE_FLAGS	+=	$(addprefix -I , ${LIBFT_INCLUDE_DIR})
+	ALL_LIBS		+=	$(LIBFT_COMPLETE)
+endif
+
+ifeq ($(IS_MLX),true)
+	INCLUDE_FLAGS	+=	$(addprefix -I , ${MLX_INCLUDE_DIR})
+	ALL_LIBS		+=	$(MLX_COMPLETE)
+endif
 
 ################################################################################
 #									Rules									   #
@@ -92,11 +124,22 @@ $(OBJS_PATH)/%.o:	%$(SRCS_EXTENSION)
 			@echo "$(CYAN)Compiling $(BLUE)$@ ...$(NO_COLOR)"
 			@$(CC) $(CFLAGS) -c $< -o $@ ${INCLUDE_FLAGS}
 
+$(LIBFT_COMPLETE):
+ifeq ($(IS_LIBFT),true)
+			@make -C $(LIBFT_DIR) all
+			@echo "$(GREEN)Compiled libft !$(NO_COLOR)"
+endif
+$(MLX_COMPLETE):
+ifeq ($(IS_MLX),true)
+			@make -C $(MLX_DIR) all
+			@echo "$(GREEN)Compiled MLX !$(NO_COLOR)"
+endif
+
 #Link
-$(NAME):	${OBJS} ${OBJ_MAIN}
+$(NAME):	${OBJS} ${OBJ_MAIN} ${LIBFT_COMPLETE} ${MLX_COMPLETE}
 		@echo ""
 		@echo "$(ORANGE)Linking $(BLUE)$@ ...$(NO_COLOR)"
-		@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -o $@ ${OBJS} ${OBJ_MAIN}
+			@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -o $@ ${OBJS} ${OBJ_MAIN} ${ALL_LIBS}
 		@echo "$(GREEN)$@ created !$(NO_COLOR)"
 
 #clean
@@ -108,7 +151,17 @@ fclean:		header clean
 		@rm -f $(NAME)
 		@echo "$(GREEN)Removed $(NAME) !$(NO_COLOR)"
 
+fcleanlib:	header fclean
+ifeq ($(IS_LIBFT),true)
+		make -C $(LIBFT_DIR) fclean
+endif
+ifeq ($(IS_MLX),true)
+		make -C $(MLX_DIR) fclean
+endif
+
 re:			header fclean all
+
+relib:		header fcleanlib all
 
 #test
 run:		header all
@@ -116,4 +169,4 @@ run:		header all
 		@echo ""
 		@./$(NAME)
 		
-.PHONY:		all header clean fclean re run
+.PHONY:		all header clean fclean re run fcleanlib relib
