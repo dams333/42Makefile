@@ -38,4 +38,4 @@
 - `fcleanlib` call `fclean` and execute `fclean` rule in the libraries' folders
 - `relib` call `fcleanlib` and `all`
 - `run` call `all` and launch the executable
-- `show` show some useful informations about the Makefile's vairables
+- `show` show some useful informations about the Makefile's variables _(for example, use with command's options to see the activated flags)_ 
