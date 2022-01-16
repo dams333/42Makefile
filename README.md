@@ -29,7 +29,7 @@
 ## Libs
 - You can enable the use of certain libraries in the corresponding sections. For each:
 - `[LIB]_DIR` is the directory where the Makefile of the library is located
-- `[LIB]_INCLUDE_DIR` is the directory where the headers' file of the library are located
+- `[LIB]_INCLUDE_DIR` is the directory where the headers' files of the library are located
 - `[LIB]_NAME` is the name of the library with her extension, normally `.a` _(she needs to be at the root of the `[LIB]_DIR` folder)_
 ---
 ## Rules
