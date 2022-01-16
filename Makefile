@@ -6,7 +6,7 @@
 #    By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/08 10:05:58 by dhubleur          #+#    #+#              #
-#    Updated: 2022/01/16 21:58:49 by dhubleur         ###   ########.fr        #
+#    Updated: 2022/01/16 22:06:03 by dhubleur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -115,7 +115,7 @@ endif
 #									Rules									   #
 ################################################################################
 
-all:	header $(NAME)
+all:	header message $(NAME)
 
 header:
 		@echo -n "${BLUE}"
@@ -127,6 +127,9 @@ header:
 		@echo "    |_|____| |_| |_| |_|\__,_|_|\_\___|_| |_|_|\___|"
 		@echo "                                         by dhubleur"
 		@echo -n "${NO_COLOR}"
+
+message:
+		@make -q $(NAME) && echo "$(GREEN)Everything is already up to date ! No work for me$(NO_COLOR)" || true
 
 #Compilation
 $(OBJS_PATH)/%.o:	$(SRCS_PATH)/%$(SRCS_EXTENSION)
