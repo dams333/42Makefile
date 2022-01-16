@@ -13,7 +13,7 @@
 - With `make [rule] sanadd`, you can add `-fsanitize=address`
 - With `make [rule] santhread`, you can add `-fsanitize=thread`
 - If you don't specify a rule, `make noflag` is equal to `make all noflag`
-- All this flags are cumulative
+- All this flags are cumulative _(`make re noflag debug sanadd` is valid)_
 ---
 ## Files
 ### Sources
