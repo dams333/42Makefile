@@ -19,12 +19,12 @@
 ## Files
 ### Sources
 - Use `SRCS_EXTENSION` to define the file type of your sources _(.c/.cpp/...)_
-- Your main must in the variable `MAIN` _(If it is in the sources folder, called `SRCS_PATH`, you must add it like this `srcs/main.c`)_
-- Add all other sources in `SRCS` _(without the folded defined in `SRCS_PATH`)_
+- Your main must be defined in the variable `MAIN` _(If it is in the sources folder, called `SRCS_PATH`, you must add it like this `srcs/main.c`)_
+- Add all other sources in `SRCS` _(without the folder defined in `SRCS_PATH`)_
 ### Includes
-- Use `INCLUDE_EXTENSION` to define the file type of your header _(.h/.hpp/...)_
+- Use `INCLUDE_EXTENSION` to define the file type of your headers _(.h/.hpp/...)_
 - Use `INCLUDE_DIRS` to select all the folders where your headers are located
-- Use `DEPENDS` to select all the header files your program should depend on (with their full path)
+- Use `DEPENDS` to select all the header files your program should depend on _(with their full path)_
 ---
 ## Libs
 - You can enable the use of certain libraries in the corresponding sections. For each:
