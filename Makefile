@@ -6,7 +6,7 @@
 #    By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/08 10:05:58 by dhubleur          #+#    #+#              #
-#    Updated: 2022/01/16 21:55:18 by dhubleur         ###   ########.fr        #
+#    Updated: 2022/01/16 21:58:49 by dhubleur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ MLX_DIR				=	./minilibx-linux
 MLX_INCLUDE_DIR		=	./minilibx-linux
 MLX_NAME			=	minilibx.a
 
-#                          /!\ Don't touch next /!\ 
+#                    /!\ Do not touch the rest of the file /!\ 
 
 ################################################################################
 #									Objects									   #
