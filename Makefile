@@ -6,7 +6,7 @@
 #    By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/08 10:05:58 by dhubleur          #+#    #+#              #
-#    Updated: 2022/01/16 22:34:52 by dhubleur         ###   ########.fr        #
+#    Updated: 2022/01/17 09:58:35 by dhubleur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,8 @@
 NAME		= 	test
 CC			= 	gcc
 CFLAGS		=
+
+RUN_PARAM	=
 
 ################################################################################
 #								  Sources									   #
@@ -31,9 +33,7 @@ SRCS			=
 #								  Includes									   #
 ################################################################################
 
-INCLUDE_EXTENSION	=	.h
 INCLUDE_DIRS		=	./includes 
-DEPENDS				=	
 
 ################################################################################
 #								  Libft										   #
@@ -65,7 +65,8 @@ OBJS_PATH		=	./objs
 
 OBJS			=	$(addprefix $(OBJS_PATH)/, ${SRCS:$(SRCS_EXTENSION)=.o})
 OBJ_MAIN		=	$(addprefix $(OBJS_PATH)/, ${MAIN:$(SRCS_EXTENSION)=.o})
-OBJS_DEPEND		=	$(addprefix $(OBJS_PATH)/, ${DEPENDS:$(INCLUDE_EXTENSION)=.d})
+OBJS_DEPEND		=	$(addprefix $(OBJS_PATH)/, ${SRCS:$(SRCS_EXTENSION)=.d})
+OBJ_MAIN_DEPEND	=	$(addprefix $(OBJS_PATH)/, ${MAIN:$(SRCS_EXTENSION)=.d})
 
 ################################################################################
 #								  Constants									   #
@@ -154,7 +155,7 @@ ifeq ($(IS_MLX),true)
 endif
 			
 #Link
--include $(OBJS_DEPEND)
+-include $(OBJS_DEPEND) $(OBJ_MAIN_DEPEND)
 $(NAME):	${OBJS} ${OBJ_MAIN} ${ALL_LIBS}
 		@echo "$(ORANGE)Linking $(BLUE)$@ ...$(NO_COLOR)"
 		@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -o $@ ${OBJS} ${OBJ_MAIN} ${ALL_LIBS}
@@ -185,7 +186,7 @@ relib:		header fcleanlib all
 run:		header all
 		@echo "$(BLUE)Executing...$(NO_COLOR)"
 		@echo ""
-		@./$(NAME)
+		@./$(NAME) $(RUN_PARAM)
 
 show:		header
 		@echo "$(CYAN)Compilator: $(GREEN)$(CC)$(NO_COLOR)"
