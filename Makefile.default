@@ -6,7 +6,7 @@
 #    By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/08 10:05:58 by dhubleur          #+#    #+#              #
-#    Updated: 2022/01/19 11:23:59 by dhubleur         ###   ########.fr        #
+#    Updated: 2022/01/19 12:42:07 by dhubleur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,46 +14,46 @@
 #								  Utils										   #
 ################################################################################
 
-NAME		= 	
-CC			= 	
-CFLAGS		=	
+NAME		= 	default_name
+CC			= 	default_comp
+CFLAGS		=	default_flags
 
-RUN_PARAM	=	
+RUN_PARAM	=	default_args
 
 ################################################################################
 #								  Sources									   #
 ################################################################################
 
-SRCS_EXTENSION	=	
-SRCS_PATH		=	
-MAIN			=	
-SRCS			=		
+SRCS_EXTENSION	=	default_srcs_ext
+SRCS_PATH		=	default_srcs_path
+MAIN			=	default_main
+SRCS			=	
 
 ################################################################################
 #								  Includes									   #
 ################################################################################
 
-INCLUDE_DIRS	=	
+INCLUDE_DIRS		=	default_incl_path
 
 ################################################################################
 #								  Libft										   #
 ################################################################################
 
-IS_LIBFT			=	
+IS_LIBFT			=	default_libft
 
-LIBFT_DIR			=	
-LIBFT_INCLUDE_DIR	=	
-LIBFT_NAME			=	
+LIBFT_DIR			=	./libft
+LIBFT_INCLUDE_DIR	=	./libft
+LIBFT_NAME			=	libft.a
 
 ################################################################################
 #								  MiniLibX									   #
 ################################################################################
 
-IS_MLX				=	
+IS_MLX				=	default_mlx
 
-MLX_DIR				=	
-MLX_INCLUDE_DIR		=	
-MLX_NAME			=	
+MLX_DIR				=	./minilibx-linux
+MLX_INCLUDE_DIR		=	./minilibx-linux
+MLX_NAME			=	minilibx.a
 
 #               /!\ Do not touch the rest of the file /!\ 
 
