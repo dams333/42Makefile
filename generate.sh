@@ -6,7 +6,7 @@ BLUE='\033[0;34m'
 CYAN='\033[0;36m'
 ORANGE='\033[0;33m'
 BOLD='\033[1m'
-NO_COLOR='\033[0m' # No Color
+NO_COLOR='\033[0m'
 DEFAULT_FILE="https://raw.githubusercontent.com/dams333/42Makefile/master/Makefile.default"
 
 printf "${BLUE}"
