@@ -1,7 +1,8 @@
 # RoadMap
 - Make the library addition system cleaner and scalable
 - Add a progress bar during compilation
-- A bash script that generate makefile and setup all the variables for a new project
+# Generator script
+The `generate.sh` script is a util script to init a project's directory. Start it in the folder where you want the project's folder wil be created and follow the instructions !
 # Documentation
 ## Compilation
 ### Basic
