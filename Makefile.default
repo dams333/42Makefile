@@ -6,7 +6,7 @@
 #    By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/08 10:05:58 by dhubleur          #+#    #+#              #
-#    Updated: 2022/01/19 12:42:07 by dhubleur         ###   ########.fr        #
+#    Updated: 2022/02/08 12:55:36 by dhubleur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -112,11 +112,67 @@ ifeq (santhread, $(filter santhread,$(MAKECMDGOALS)))
 	CFLAGS	+=	-fsanitize=thread
 endif
 
+define count_files
+	TOTAL_FILES=`bash -c 'make -n | grep -- "-c.*-o" | wc -l'`; \
+	TOTAL_FILES=$$((TOTAL_FILES-1)); \
+	if [ $$TOTAL_FILES -ne 0 ]; then \
+		echo -n $$TOTAL_FILES > .MAKEFILE_total_files; \
+		echo -n "0" > .MAKEFILE_compiled_files; \
+		tput civis; \
+	fi;
+endef
+
+define file_compiled
+	COMPILED=`bash -c 'cat .MAKEFILE_compiled_files'`; \
+	COMPILED=$$((COMPILED+1)); \
+	echo -n $$COMPILED > .MAKEFILE_compiled_files; \
+	sleep 0.1;
+endef
+
+define draw_bar
+	TOTAL_FILES=`bash -c 'cat .MAKEFILE_total_files'`; \
+	COMPILED=`bash -c 'cat .MAKEFILE_compiled_files'`; \
+	TOTAL_LENGTH=52; \
+	if [ $$COMPILED -eq 0 ]; then \
+		COMPLETED_LENGTH=0; \
+	else \
+		INCREMENT=$$((TOTAL_LENGTH/TOTAL_FILES)); \
+		COMPLETED_LENGTH=$$((INCREMENT*COMPILED)); \
+	fi; \
+	PRINT=0; \
+	printf "\r"; \
+	while [ $$PRINT -ne $$COMPLETED_LENGTH ]; do \
+		printf "\e[0;32m█\e[0m"; \
+		PRINT=$$((PRINT+1)); \
+	done; \
+	if [ $$COMPILED -eq $$TOTAL_FILES ]; then \
+		while [ $$PRINT -ne $$TOTAL_LENGTH ]; do \
+			printf "\e[0;32m█\e[0m"; \
+			PRINT=$$((PRINT+1)); \
+		done; \
+	fi; \
+	while [ $$PRINT -ne $$TOTAL_LENGTH ]; do \
+		printf "\e[0m▒\e[0m"; \
+		PRINT=$$((PRINT+1)); \
+	done; \
+	if [ $$COMPILED -eq $$TOTAL_FILES ]; then \
+		printf "\n"; \
+		tput cvvis; \
+	fi;
+endef
+
+define clean
+	rm -f .MAKEFILE_total_files; \
+	rm -f .MAKEFILE_compiled_files; \
+	tput cvvis;
+endef
+
 ################################################################################
 #								  Rules										   #
 ################################################################################
 
-all:	header message $(NAME)
+all:	header message
+		@make -s $(NAME) || $(MAKE) reset
 
 #beautiful
 header:
@@ -132,16 +188,25 @@ header:
 
 message:
 		@make -q $(NAME) && echo "$(GREEN)Everything is already up to date ! No work for me$(NO_COLOR)" || true
+		@$(call count_files)
 
 #Compilation
 $(OBJS_PATH)/%.o:	$(SRCS_PATH)/%$(SRCS_EXTENSION)
 			@mkdir -p $(dir $@)
-			@echo "$(CYAN)Compiling $(BLUE)$@ ...$(NO_COLOR)"
+			@$(call draw_bar)
+			@echo "\r$(CYAN)Compiling $(BLUE)$@ ...$(NO_COLOR)                             "
+			@$(call draw_bar)
 			@$(CC) $(CFLAGS) -MMD -MF $(@:.o=.d)  ${INCLUDE_FLAGS} -c $< -o $@
+			@$(call file_compiled)
+			@$(call draw_bar)
 $(OBJS_PATH)/%.o:	%$(SRCS_EXTENSION)
 			@mkdir -p $(dir $@)
-			@echo "$(CYAN)Compiling $(BLUE)$@ ...$(NO_COLOR)"
+			@$(call draw_bar)
+			@echo "\r$(CYAN)Compiling $(BLUE)$@ ...$(NO_COLOR)                             "
+			@$(call draw_bar)
 			@$(CC) $(CFLAGS) -MMD -MF $(@:.o=.d)  ${INCLUDE_FLAGS} -c $< -o $@
+			@$(call file_compiled)
+			@$(call draw_bar)
 
 $(LIBFT_COMPLETE):
 ifeq ($(IS_LIBFT),true)
@@ -159,6 +224,7 @@ endif
 $(NAME):	${OBJS} ${OBJ_MAIN} ${ALL_LIBS}
 		@echo "$(ORANGE)Linking $(BLUE)$@ ...$(NO_COLOR)"
 		@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -o $@ ${OBJS} ${OBJ_MAIN} ${ALL_LIBS}
+		@$(call clean)
 		@echo "$(GREEN)$@ created !$(NO_COLOR)"
 
 #clean
@@ -208,5 +274,8 @@ sanadd:		all
 		@echo -n ""
 santhread:	all
 		@echo -n ""
+
+reset:
+		@$(call clean)
 		
-.PHONY:		all header clean fclean re run fcleanlib relib noflag debug sanadd santhread show
+.PHONY:		all header clean fclean re run fcleanlib relib noflag debug sanadd santhread show reset
