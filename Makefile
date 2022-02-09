@@ -6,7 +6,7 @@
 #    By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/08 10:05:58 by dhubleur          #+#    #+#              #
-#    Updated: 2022/02/09 18:05:26 by dhubleur         ###   ########.fr        #
+#    Updated: 2022/02/09 18:05:56 by dhubleur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ CFLAGS		=
 
 RUN_PARAM	=	
 
-VOGSPHERE	=	git@github.com:dams333/42Makefile.git
+VOGSPHERE	=	
 
 ################################################################################
 #								  Sources									   #
