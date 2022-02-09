@@ -6,7 +6,7 @@
 #    By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/08 10:05:58 by dhubleur          #+#    #+#              #
-#    Updated: 2022/02/09 18:03:21 by dhubleur         ###   ########.fr        #
+#    Updated: 2022/02/09 18:04:32 by dhubleur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -282,7 +282,7 @@ reset:
 
 vogpush: header
 		@rm -rf /tmp/push_$(NAME)
-		@git clone -s $(VOGSPHERE) /tmp/push_$(NAME)
+		@git clone --quiet $(VOGSPHERE) /tmp/push_$(NAME)
 		@echo "$(GREEN)Cloned repository !$(NO_COLOR)"
 		@rm -rf /tmp/push_$(NAME)/*
 		@cp -r * /tmp/push_$(NAME)/.
@@ -290,7 +290,7 @@ vogpush: header
 		@cd /tmp/push_$(NAME)
 		@git add .
 		@git commit -m "Automatic commit"
-		@git push --set-upstream origin master
+		@git --quiet push --set-upstream origin master
 		@echo "$(GREEN)Pushed repository !$(NO_COLOR)"
 		
 .PHONY:		all header clean fclean re run fcleanlib relib noflag debug sanadd santhread show reset vogpush
