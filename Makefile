@@ -6,7 +6,7 @@
 #    By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/08 10:05:58 by dhubleur          #+#    #+#              #
-#    Updated: 2022/02/09 18:03:12 by dhubleur         ###   ########.fr        #
+#    Updated: 2022/02/09 18:03:21 by dhubleur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -282,7 +282,7 @@ reset:
 
 vogpush: header
 		@rm -rf /tmp/push_$(NAME)
-		@git clone $(VOGSPHERE) /tmp/push_$(NAME)
+		@git clone -s $(VOGSPHERE) /tmp/push_$(NAME)
 		@echo "$(GREEN)Cloned repository !$(NO_COLOR)"
 		@rm -rf /tmp/push_$(NAME)/*
 		@cp -r * /tmp/push_$(NAME)/.
