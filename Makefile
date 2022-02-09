@@ -6,7 +6,7 @@
 #    By: dhubleur <dhubleur@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/08 10:05:58 by dhubleur          #+#    #+#              #
-#    Updated: 2022/02/09 18:00:35 by dhubleur         ###   ########.fr        #
+#    Updated: 2022/02/09 18:01:43 by dhubleur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -281,12 +281,13 @@ reset:
 		@$(call clean)
 
 vogpush:
+		rm -rf /tmp/push_$(NAME)
 		git clone $(VOGSPHERE) /tmp/push_$(NAME)
 		rm -rf /tmp/push_$(NAME)/*
 		cp -r * /tmp/push_$(NAME)/.
 		cd /tmp/push_$(NAME)
 		git add .
 		git commit -m "Automatic commit"
-		git push
+		git push --set-upstream origin master
 		
 .PHONY:		all header clean fclean re run fcleanlib relib noflag debug sanadd santhread show reset vogpush
